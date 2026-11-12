@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor Responsable
+participant "Système" as S
+participant DemandeHebergement as D
+participant Chambre as C
+participant Attribution as A
+
+Responsable -> S : attribuerChambre(idDemande, numero)
+S -> D : getStatut()
+D --> S : EN_ATTENTE
+S -> C : estDisponible()
+C --> S : true
+
+alt chambre disponible et étudiant sans attribution active
+  S -> A ** : new Attribution(demande, chambre, dateDebut)
+  S -> C : mettreAJourStatut()
+  S -> D : valider()
+  S --> Responsable : attribution confirmée
+else sinon
+  S --> Responsable : erreur, attribution refusée
+end
+@enduml

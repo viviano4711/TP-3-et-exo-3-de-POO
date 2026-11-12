@@ -1,0 +1,19 @@
+@startuml
+hide empty description
+
+state "En attente" as EA
+state "Validée" as V
+state "Rejetée" as R
+state "Annulée" as AN
+state "Clôturée" as CL
+
+[*] --> EA : enregistrer()
+EA --> V : valider()\n[chambre disponible]
+EA --> R : rejeter()\n[aucune place]
+EA --> AN : annuler()
+V --> AN : annuler()
+V --> CL : enregistrerDepart()
+R --> [*]
+AN --> [*]
+CL --> [*]
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Residence {
+  - idResidence : int
+  - nom : String
+  - adresse : String
+  + calculerTauxOccupation() : float
+  + getStatistiques() : Map
+}
+
+class Batiment {
+  - idBatiment : int
+  - nom : String
+  - nbEtages : int
+}
+
+class Chambre {
+  - numero : String
+  - etage : int
+  - capacite : int
+  - statut : String
+  + estDisponible() : boolean
+  + getPlacesRestantes() : int
+}
+
+class Etudiant {
+  - matricule : String
+  - nom : String
+  - prenom : String
+  - telephone : String
+}
+
+class DemandeHebergement {
+  - idDemande : int
+  - dateDemande : Date
+  - statut : String
+  + valider() : void
+  + rejeter() : void
+}
+
+class Attribution {
+  - idAttribution : int
+  - dateDebut : Date
+  - dateFin : Date
+  + terminer() : void
+  + estActive() : boolean
+}
+
+Residence "1" -- "1.." Batiment : contient
+Batiment "1" -- "1.." Chambre : contient
+Etudiant "1" --> "0..*" DemandeHebergement : soumet
+DemandeHebergement "1" --> "0..1" Attribution : donne lieu à
+Chambre "1" --> "0..*" Attribution : est attribuée
+Etudiant "1" --> "0..*" Attribution : occupe
+@enduml

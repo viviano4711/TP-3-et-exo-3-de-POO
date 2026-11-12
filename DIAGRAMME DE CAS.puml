@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+
+actor "Étudiant" as E
+actor "Responsable" as R
+
+rectangle "Système de gestion de résidence" {
+  usecase "Enregistrer une demande\nd'hébergement" as UC1
+  usecase "Attribuer une chambre" as UC2
+  usecase "Vérifier les places\ndisponibles" as UC3
+  usecase "Enregistrer un départ" as UC4
+  usecase "Consulter chambres\noccupées et libres" as UC5
+  usecase "Consulter l'historique\ndes occupations" as UC6
+  usecase "Calculer le taux d'occupation\net statistiques (extension)" as UC7
+}
+
+E --> UC1
+R --> UC1
+R --> UC2
+R --> UC4
+R --> UC5
+R --> UC6
+R --> UC7
+
+UC2 .> UC3
+@enduml
